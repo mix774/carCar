@@ -1,5 +1,4 @@
 const express = require('express')
-const { send } = require('express/lib/response')
 const router = express.Router()
 const testCars = [
     {
@@ -30,7 +29,7 @@ router.get('/cars', async (request, respose) => {
 })
 
 // найти определенную машину по id
-router.get('/cars/:id', async (req, res) => {  
+router.get('/cars/:id', async (req, res) => {
     // req.params для переда параметра через /
     res.status(200).send(testCars.filter(car =>  car.id === req.params.id))
 })
