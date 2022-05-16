@@ -1,7 +1,11 @@
 const express = require('express')
 require('./db/mongoose')
+const fileUpload = require('express-fileupload')
 const userRouter = require('./routers/user')
-const carRouter = require('./routers/car')
+const postRouter = require('./routers/post')
+const brandRouter = require('./routers/brand')
+const typeRouter = require('./routers/type')
+const modelController = require('./routers/model')
 
 const app = express()
 const port = 3000
@@ -9,6 +13,9 @@ const port = 3000
 
 app.use(express.json())
 app.use(userRouter)
-app.use(carRouter)
+app.use(postRouter)
+app.use(brandRouter)
+app.use(typeRouter)
+app.use(modelController)
 
 module.exports = app
