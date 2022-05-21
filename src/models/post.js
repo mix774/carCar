@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { string } = require('sharp/lib/is')
+const { string, bool } = require('sharp/lib/is')
 const postSchema = new mongoose.Schema({
 	brand: {
 		type: String,
@@ -27,8 +27,20 @@ const postSchema = new mongoose.Schema({
 		required: true
 	},
 	picture: {
-		type: string,
+		type: String,
 //		required: true
+	},
+	mileage: {
+		type: Number,
+	},
+	views: {
+		type: Number,
+		default: 0
+	},
+	active: {
+		type: Boolean,
+		required: true,
+		default: true
 	}
 }, { timestamps: true })
 

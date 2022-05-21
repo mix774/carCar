@@ -1,5 +1,5 @@
 const express = require('express')
-require('./db/mongoose')
+require('../src/db/mongoose')
 const fileUpload = require('express-fileupload')
 const userRouter = require('./routers/user')
 const postRouter = require('./routers/post')

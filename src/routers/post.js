@@ -19,4 +19,13 @@ router.put('/posts', postController.update)
 //удаление по id
 router.delete('/posts/:id', postController.delete)
 
+//активировать объявление
+router.put('/activatepost/:id', postController.activate)
+
+//деактивировать объявление
+router.put('/deactivatepost/:id', postController.deactivate)
+
+//инкремент просмотров
+router.put('/addpostviews/:id', postController.incrementViews)
+
 module.exports = router

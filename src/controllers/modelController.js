@@ -14,7 +14,7 @@ class ModelController {
 
 	async getAll(req, res) {
 		try {
-			const models = await Model.find()
+			const models = await Model.find().populate('brand').populate('types')
 			res.status(200).json(models)
 		} catch (err) {
 			res.status(500).json({ message: err.message })

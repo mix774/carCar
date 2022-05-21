@@ -15,7 +15,10 @@ const userSchema = new mongoose.Schema({
 	role: {
 		type: String,
 		required: true
-	}
+	},
+	favorites: [{
+		type: mongoose.Schema.Types.ObjectId, ref: 'Post'
+	}]
 }, { timestamps: true })
 
 const User = mongoose.model('User', userSchema)

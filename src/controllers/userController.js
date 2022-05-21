@@ -1,3 +1,4 @@
+const { findById } = require('../models/user')
 const User = require('../models/user')
 
 class UserController {
@@ -17,7 +18,7 @@ class UserController {
 			if (candidate) {
 				return res.status(409).json({ message: 'Пользователь с таким логином уже зарегистрирован' })
 			} else {
-				const user = await User.create({ name, email, password, role })
+				const user = await User.create({ name, email, password, role, favorites})
 				return res.status(201).json({ message: 'Пользователь создан' })
 			}
 		} catch (err) {
@@ -71,6 +72,20 @@ class UserController {
 			}
 			res.status(200).json(deletedUser)
 		} catch (err) {
+			res.status(500).json({ message: err.message })
+		}
+	}
+
+	async getAllFavorites(req, res) {
+		try {
+			const { id } = req.params
+			if (!(await User.findById(id))) {
+				return res.status(404).json({ message: "Такого пользователя не существует" })
+			}
+			const favoritesList = await User.findById(id, {favorites: 1, _id:0}).populate('favorites')
+			res.status(200).json(favoritesList)
+		} catch (err) {
+			console.log(err)
 			res.status(500).json({ message: err.message })
 		}
 	}

@@ -16,4 +16,7 @@ router.put('/users', userController.update)
 //удаление по id
 router.delete('/users/:id', userController.delete)
 
+//получение всех избранных
+router.get('/userfavorites/:id', userController.getAllFavorites)
+
 module.exports = router
