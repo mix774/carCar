@@ -1,13 +1,11 @@
 const mongoose = require('mongoose')
 const { string, bool } = require('sharp/lib/is')
 const postSchema = new mongoose.Schema({
-	brand: {
-		type: String,
-		require: true
-	},
 	model: {
-		type: String,
-		require: true
+		type: mongoose.Schema.Types.ObjectId, ref: 'Model'
+	},
+	type: {
+		type: mongoose.Schema.Types.ObjectId, ref: 'Type'
 	},
 	year: {
 		type: Number,
