@@ -16,16 +16,16 @@ function PostCard(props) {
 				<Card sx={{ display: 'flex' }}>
 					<CardContent sx={{ flex: 1 }}>
 						<Typography component="h2" variant="h5">
-							{post.brand}
+							{post.brand} {post.model}
 						</Typography>
-						<Typography component="subtitle1" variant="h5">
+{/* 						<Typography component="subtitle1" variant="h5">
 							{post.model}
-						</Typography>
+						</Typography> */}
 						<Typography variant="subtitle1" color="text.secondary">
 							{post.amounOfOwners}
 						</Typography>
 						<Typography variant="subtitle1" paragraph>
-							{post.price}
+							Цена {post.price}
 						</Typography>
 						<Typography variant="subtitle1" paragraph>
 							{post.description}

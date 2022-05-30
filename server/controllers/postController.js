@@ -2,7 +2,7 @@ const uuid = require('uuid')
 const path = require('path');
 const Post = require('../models/post');
 const { json } = require('express/lib/response');
-
+const Image = require('../models/image')
 
 class PostController {
 	async create(req, res) {
@@ -121,6 +121,30 @@ class PostController {
 		} catch (err) {
 			res.status(500).json({ message: err.message })
 		}
+	}
+
+	async uploadImages(req, res) {
+
+		console.log(req.body);
+		console.log(req.files);
+
+		const savedImage = await Image.create({ image: { data: Buffer.from(req.files.image.data, 'base64'), contentType: req.files.image.mimetype } });
+		const { id } = req.params
+		console.log(`Post ID: ${id}`)
+
+		const updatedPost = await Post.updateOne(
+			{ _id: id },
+			{ $push: { images: savedImage._id } }
+		);
+		res.send(updatedPost)
+
+	}
+
+	async getImage(req, res) {
+		const { id: _id } = req.params;
+		// If you don't use lean(), you wont decode image as base64
+		const image = await Image.findOne({ _id }).lean().exec();
+		res.send(image);
 	}
 }
 

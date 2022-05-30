@@ -28,4 +28,8 @@ router.put('/deactivatepost/:id', postController.deactivate)
 //инкремент просмотров
 router.put('/addpostviews/:id', postController.incrementViews)
 
+router.post('/post/:id/uploadImages', postController.uploadImages)
+
+router.get('/image/:id', postController.getImage)
+
 module.exports = router

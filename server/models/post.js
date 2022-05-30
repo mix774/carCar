@@ -24,10 +24,9 @@ const postSchema = new mongoose.Schema({
 		type: Number,
 		required: true
 	},
-	picture: {
-		type: String,
-//		required: true
-	},
+	images: [{
+		type: mongoose.Schema.Types.ObjectId, ref: 'Image'
+	}],
 	mileage: {
 		type: Number,
 	},

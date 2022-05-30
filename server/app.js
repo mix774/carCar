@@ -1,16 +1,18 @@
 const express = require('express')
 require('../server/db/mongoose')
-const fileUpload = require('express-fileupload')
 const userRouter = require('./routers/user')
 const postRouter = require('./routers/post')
 const brandRouter = require('./routers/brand')
 const typeRouter = require('./routers/type')
 const modelController = require('./routers/model')
+const fileUpload = require('express-fileupload');
 
 const app = express()
 const port = 3000
 
-
+app.use(fileUpload({
+	limits: { fileSize: 50 * 1024 * 1024 },
+}))
 app.use(express.json())
 app.use(userRouter)
 app.use(postRouter)
