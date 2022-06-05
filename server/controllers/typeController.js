@@ -1,45 +1,46 @@
 const Type = require('../models/type')
+const ApiError = require('../error/ApiError')
 
 class TypeController {
-	async create(req, res) {
+	async create(req, res, next) {
 		try {
 			const { name } = req.body
 			if (!name) {
-				return res.status(400).json({message: "Введите тип кузова"})
+				return next(ApiError.badRequest("Введите тип кузова"))
 			}
 			const existingType = await Type.findOne({ name: name })
 			if (existingType) {
-				return res.status(400).json({ message: "Такой тип кузова уже существует" })
+				return next(ApiError.badRequest(`Тип кузова ${name} уже существует`))
 			}
 			const type = await Type.create({ name })
 			res.status(201).json(type)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async getAll(req, res) {
+	async getAll(req, res, next) {
 		try {
 			const types = await Type.find()
-			res.status(200).json(types)
+			res.json(types)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async delete(req, res) {
+	async delete(req, res, next) {
 		try {
 			const { id } = req.params
 			if (!id || id.trim() === "") {
-				return res.status(400).json({ message: "ID не указан" })
+				return next(ApiError.badRequest("ID не указан"))
 			}
 			const deletedType = await Type.findByIdAndDelete(id)
 			if (!deletedType) {
-				return res.status(404).json({ message: "Тип кузова не найден" })
+				return next(ApiError.notFound("Тип кузова не найден"))
 			}
-			res.status(200).json(deletedType)
+			res.json(deletedType)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 }

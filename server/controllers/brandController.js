@@ -1,46 +1,47 @@
 const Brand = require('../models/brand')
+const ApiError = require('../error/ApiError')
+
 
 class BrandController {
-	async create(req, res) {
+	async create(req, res, next) {
 		try {
 			const { name } = req.body
 			if (!name) {
-				return res.status(400).json({message: "Введите бренд"})
+				return next(ApiError.badRequest("Бренд не указан"))
 			}
 			const existingBrand = await Brand.findOne({ name: name })
 			if (existingBrand) {
-				return res.status(400).json({ message: "Такой бренд уже существует" })
+				return next(ApiError.badRequest(`Бренд с именем ${name} уже существует`))
 			}
 			const brand = await Brand.create({ name })
 			res.status(201).json(brand)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async getAll(req, res) {
+	async getAll(req, res, next) {
 		try {
 			const brands = await Brand.find()
-			res.status(200).json(brands)
+			res.json(brands)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async delete(req, res) {
+	async delete(req, res, next) {
 		try {
 			const { id } = req.params
 			if (!id || id.trim() === "") {
-				return res.status(400).json({ message: "ID не указан" })
+				return next(ApiError.badRequest("ID не указан"))
 			}
-
 			const deletedBrand = await Brand.findByIdAndDelete(id)
 			if (!deletedBrand) {
-				return res.status(404).json({ message: "Бренд не найден" })
+				return next(ApiError.notFound("Бренд не найден"))
 			}
-			res.status(200).json(deletedBrand)
+			res.json(deletedBrand)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 }

@@ -14,7 +14,7 @@ const postSchema = new mongoose.Schema({
 	amountOfOwners: {
 		type: Number,
 		required: true
-	},
+	}, 
 	description: {
 		type: String,
 		required: true,
@@ -36,7 +36,7 @@ const postSchema = new mongoose.Schema({
 	},
 	active: {
 		type: Boolean,
-		required: true,
+		//required: true,
 		default: true
 	}
 }, { timestamps: true })

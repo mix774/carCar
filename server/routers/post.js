@@ -1,22 +1,23 @@
 const Router = require('express')
 const router = new Router()
 const postController = require('../controllers/postController')
+const checkRole = require('../middleware/CheckRoleMiddleware')
 
-//создать машину
-router.post('/post', postController.create)
+//создать объявление
+router.post('/post', checkRole('ADMIN'), postController.create)
 
-//отобразить все машины
+//отобразить все объявления
 router.get('/posts', postController.getAll)
 
-//найти определенную машину по id
+//найти определенное объявление по id
 router.get('/posts/:id', postController.getById)
 
 //todo:  сделать!!!!!!!!!!!!!
-//обновление
-router.put('/posts', postController.update)
+//обновление объявления
+router.put('/post', postController.update)
 
 //todo create router to delete car by id
-//удаление по id
+//удаление объявления по id
 router.delete('/posts/:id', postController.delete)
 
 //активировать объявление
@@ -28,6 +29,7 @@ router.put('/deactivatepost/:id', postController.deactivate)
 //инкремент просмотров
 router.put('/addpostviews/:id', postController.incrementViews)
 
+//загрузка картинки в объявление
 router.post('/post/:id/uploadImages', postController.uploadImages)
 
 router.get('/image/:id', postController.getImage)

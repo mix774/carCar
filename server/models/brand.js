@@ -3,8 +3,7 @@ const { string } = require('sharp/lib/is')
 const brandSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		require: true,
-		unique: true
+		require: true
 	}
 }, { timestamps: true })
 

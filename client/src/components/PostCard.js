@@ -16,9 +16,9 @@ function PostCard(props) {
 				<Card sx={{ display: 'flex' }}>
 					<CardContent sx={{ flex: 1 }}>
 						<Typography component="h2" variant="h5">
-							{post.brand} {post.model}
+							{post.model.name}
 						</Typography>
-{/* 						<Typography component="subtitle1" variant="h5">
+						{/* 						<Typography component="subtitle1" variant="h5">
 							{post.model}
 						</Typography> */}
 						<Typography variant="subtitle1" color="text.secondary">
@@ -30,6 +30,14 @@ function PostCard(props) {
 						<Typography variant="subtitle1" paragraph>
 							{post.description}
 						</Typography>
+						{
+							post.images.length > 0 && <CardMedia
+							component="img"
+							height="194"
+							image={`http://localhost:3000/image/${post.images[0]}`} 
+							alt="Car image"
+						  />
+						}
 					</CardContent>
 				</Card>
 			</CardActionArea>

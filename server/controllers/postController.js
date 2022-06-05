@@ -2,149 +2,153 @@ const uuid = require('uuid')
 const path = require('path');
 const Post = require('../models/post');
 const { json } = require('express/lib/response');
-const Image = require('../models/image')
+const Image = require('../models/image');
+const ApiError = require('../error/ApiError')
 
 class PostController {
-	async create(req, res) {
+	async create(req, res, next) {
 		try {
-			const { brand, model, year, amountOfOwners, description, price, picture, mileage, views, activate } = req.body
-			/*
-			const { picture } = req.files
-			let fileName = uuid.v4() + ".jpg"
-			img.mv(path.resolve(__dirname, '..', 'static', fileName))*/
-			//const car = await Car.create({ brand, model, year, amountOfOwners, description, price, picture: fileName})
-			const post = await Post.create({ brand, model, year, amountOfOwners, description, price, mileage, picture, views, activate })
-			res.status(201).json(post)
+			const { model, type, year, amountOfOwners, description, price, mileage, views, active } = req.body
+			const post = await Post.create({ model, type, year, amountOfOwners, description, price, mileage, views, active })
+			return res.status(201).json(post)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async getAll(req, res) {
+	async getAll(req, res, next) {
 		try {
-			const posts = await Post.find()
-			res.status(200).json(posts)
+			const posts = await Post.find().populate('model').populate('type')
+			return res.json(posts)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async getById(req, res) {
+	async getById(req, res, next) {
 		try {
 			const { id } = req.params
 			if (!id) {
-				return res.status(400).json({ message: "ID объявления не указан" })
-
+				return next(ApiError.badRequest("ID объявления не указан"))
 			}
-			const post = await Post.findById(id)
-			res.status(200).json(post)
+			const post = await Post.findById(id).populate('model').populate('type')
+			if (!post) {
+				return next(ApiError.badRequest("Объявления не существует"))
+			}
+			return res.json(post)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async update(req, res) {
+	async update(req, res, next) {
 		try {
 			const post = req.body
 			if (!post._id) {
-				return res.status(400).json({ message: "ID объявления не указан" })
+				return next(ApiError.badRequest("ID объявления не указан"))
 			}
 			const updatedPost = await Post.findByIdAndUpdate(post._id, post, { new: true })
 			if (!updatedPost) {
-				return res.status(404).json({ message: "Объявление не существует" })
+				return next(ApiError.notFound("Объявление не найдено"))
 			}
-			res.status(200).send(updatedPost)
+			return res.status(201).send(updatedPost)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async delete(req, res) {
+	async delete(req, res, next) {
 		try {
 			const { id } = req.params
 			if (!id) {
-				return res.status(400).json({ message: "ID объявления не указан" })
+				return next(ApiError.badRequest("ID объявления не указан"))
 			}
 			const deletedPost = await Post.findByIdAndDelete(id)
 			if (!deletedPost) {
-				return res.status(404).json({ message: "Объявление уже удалено" })
+				return next(ApiError.notFound("Объявление не найдено"))
 			}
-			res.status(200).json(deletedPost)
+			return res.json(deletedPost)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async activate(req, res) {
+	async activate(req, res, next) {
 		try {
 			const { id } = req.params
 			const condition = await Post.findById(id)
 			if (!condition) {
-				return res.status(404).json({ message: "Такого объявления не существует" })
+				return next(ApiError.notFound("Объявление не найдено"))
 			}
 			if (condition.active === true) {
-				return res.status(400).json({ message: "Объявление уже активировано" })
+				return next(ApiError.badRequest("Объявление уже активировано"))
 			}
-			console.log("tabta")
 			const activatedPost = await Post.findByIdAndUpdate(id, { $set: { active: true } }, { new: true })
-			res.status(201).json(activatedPost)
+			return res.status(201).json(activatedPost)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async deactivate(req, res) {
+	async deactivate(req, res, next) {
 		try {
 			const { id } = req.params
 			const condition = await Post.findById(id)
 			if (!condition) {
-				return res.status(404).json({ message: "Такого объявления не существует" })
+				return next(ApiError.notFound("Объявление не найдено"))
 			}
 			if (condition.active === false) {
-				return res.status(400).json({ message: "Объявление уже деактивировано" })
+				return next(ApiError.badRequest("Объявление уже деактивировано"))
 			}
 			const deactivatedPost = await Post.findByIdAndUpdate(id, { $set: { active: false } }, { new: true })
-			res.status(201).json(deactivatedPost)
+			return res.status(201).json(deactivatedPost)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async incrementViews(req, res) {
+	async incrementViews(req, res, next) {
 		try {
 			const { id } = req.params
-			if (!(await Post.findById(id))) {
-				return res.status(404).json({ message: "Такого объявления не существует" })
+			const condition = await Post.findById(id)
+			if (!condition) {
+				return next(ApiError.notFound("Объявление не найдено"))
 			}
 			const updatedViews = await Post.findByIdAndUpdate(id, { $inc: { views: 1 } }, { new: true })
-			res.status(201).json(updatedViews)
+			return res.status(201).json(updatedViews)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async uploadImages(req, res) {
-
-		console.log(req.body);
-		console.log(req.files);
-
-		const savedImage = await Image.create({ image: { data: Buffer.from(req.files.image.data, 'base64'), contentType: req.files.image.mimetype } });
-		const { id } = req.params
-		console.log(`Post ID: ${id}`)
-
-		const updatedPost = await Post.updateOne(
-			{ _id: id },
-			{ $push: { images: savedImage._id } }
-		);
-		res.send(updatedPost)
-
+	async uploadImages(req, res, next) {
+		try {
+			const savedImage = await Image.create({ image: { data: Buffer.from(req.files.image.data, 'base64'), contentType: req.files.image.mimetype } });
+			const { id } = req.params
+			console.log(`Post ID: ${id}`)
+			const updatedPost = await Post.updateOne(
+				{ _id: id },
+				{ $push: { images: savedImage._id } }
+			);
+			return res.send(updatedPost)
+		} catch (err) {
+			next(ApiError.internal(err.message))
+		}
 	}
 
-	async getImage(req, res) {
-		const { id: _id } = req.params;
-		// If you don't use lean(), you wont decode image as base64
-		const image = await Image.findOne({ _id }).lean().exec();
-		res.send(image);
+	async getImage(req, res, next) {
+		try {
+			const { id: _id } = req.params;
+			const image = await Image.findOne({ _id });
+			var img = Buffer.from(image.image.data, 'base64');
+			res.writeHead(200, {
+				'Content-Type': image.image.contentType,
+				'Content-Length': img.length
+			});
+			return res.end(img);
+		} catch (err) {
+			next(ApiError.internal(err.message))
+		}
 	}
 }
 

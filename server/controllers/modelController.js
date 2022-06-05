@@ -1,39 +1,62 @@
 const Model = require('../models/model')
+const ApiError = require('../error/ApiError')
 
 class ModelController {
-	async create(req, res) {
+	async create(req, res, next) {
 		try {
-			const {name, brand, types} = req.body
-			const model = await Model.create({name, brand, types})
+			const { name, brand, types } = req.body
+			if (!name) {
+				return next(ApiError.badRequest("Бренд не указан"))
+			}
+			const existingModel = await Model.findOne({ name: name })
+			if (existingModel) {
+				return next(ApiError.badRequest(`Модель ${name} уже существует`))
+			}
+			const model = await Model.create({ name, brand, types })
 			res.status(201).json(model)
-			//сделать  проверку на 
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async getAll(req, res) {
+	async getAll(req, res, next) {
 		try {
-			const models = await Model.find().populate('brand').populate('types')
-			res.status(200).json(models)
+			const models = await Model.find().populate()
+			res.json(models)
 		} catch (err) {
-			res.status(500).json({ message: err.message })
+			next(ApiError.internal(err.message))
+		}
+	}
+	
+	async update(req, res, next) {
+		try {
+			const model = req.body
+			if (!model._id) {
+				return next(ApiError.badRequest("ID модели не указан"))
+			}
+			const updatedModel = await Model.findByIdAndUpdate(model._id, model, { new: true })
+			if (!updatedModel) {
+				return next(ApiError.notFound("Объявление не найдено"))
+			}
+			return res.status(201).send(updatedModel)
+		} catch (err) {
+			next(ApiError.internal(err.message))
 		}
 	}
 
-	async delete(req, res) {
+	async delete(req, res, next) {
 		try {
 			const { id } = req.params
 			if (!id) {
-				res.status(400).send("ID не указан")
+				return next(ApiError.badRequest("ID не указан"))
 			}
 			const deletedModel = await Model.findByIdAndDelete(id)
 			if (!deletedModel) {
-				return res.status(404).json({message: "Модель не найдена"})
+				return next(ApiError.notFound("Модель не найдена"))
 			}
-			res.status(200).send(deletedModel)
+			res.json(deletedModel)
 		} catch (err) {
-			res.send(500).send(err.message)
+			next(ApiError.internal(err.message))
 		}
 	}
 }
