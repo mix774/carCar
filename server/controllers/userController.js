@@ -15,6 +15,8 @@ class UserController {
 	async registration(req, res, next) {
 		try {
 			const { firstName, secondName, email, phoneNumber, password, role, favorites } = req.body
+			console.log(email);
+			console.log(password);
 			if (!email || !password) {
 				return next(ApiError.badRequest("Логин и пароль обязательны для заполнения"))
 			}
@@ -39,9 +41,8 @@ class UserController {
 				return next(ApiError.notFound("Пользователь не найден"))
 			}
 			let comparePassword = bcrypt.compareSync(password, user.password)
-			console.log(comparePassword)
 			if (!comparePassword) {
-				return next(ApiError.badRequest("Указан неверный пароль"))
+				return next(ApiError.badRequest("Невозможно войти в систему"))
 			}
 			const token = generateJwt(user._id, user.email, user.role)
 			return res.json({token})

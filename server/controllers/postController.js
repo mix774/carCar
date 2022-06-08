@@ -9,7 +9,7 @@ class PostController {
 	async create(req, res, next) {
 		try {
 			const { model, type, year, amountOfOwners, description, price, mileage, views, active } = req.body
-			const post = await Post.create({ model, type, year, amountOfOwners, description, price, mileage, views, active })
+			const post = await Post.create({ model, type, year, amountOfOwners, description, price, mileage, views, active, userId: req.user.id })
 			return res.status(201).json(post)
 		} catch (err) {
 			next(ApiError.internal(err.message))

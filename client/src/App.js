@@ -11,30 +11,9 @@ import Header from './Header';
 import PostCard from './components/PostCard';
 import PostsList from './components/PostsList';
 
-const theme = createTheme()
-
-const sections = [
-  { title: 'О компании', url: '#' },
-  { title: 'Политика работы', url: '#' },
-  { title: 'Контакты', url: '#' },
-];
-
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <Header title = "carCar" sections = {sections}/>
-      
-        <main>
-          <PostsList />
-          <Grid container spacing={5} sx={{ mt: 3 }}>
-            
-          </Grid>
-        </main>
-      </Container>
-
-    </ThemeProvider>
+    <PostsList />
   );
 }
 

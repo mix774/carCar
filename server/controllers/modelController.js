@@ -21,7 +21,7 @@ class ModelController {
 
 	async getAll(req, res, next) {
 		try {
-			const models = await Model.find().populate()
+			const models = await Model.find().populate('brand')
 			res.json(models)
 		} catch (err) {
 			next(ApiError.internal(err.message))
