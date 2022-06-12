@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link as RouterLink} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
@@ -15,29 +15,36 @@ function Header(props) {
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Button size="small">Subscribe</Button>
-        <Typography
-          component="h2"
+        <Link
+          style={{ textDecoration: 'none' }}
           variant="h5"
           color="inherit"
           align="center"
           noWrap
+          key={title.title}
+          href={title.url}
           sx={{ flex: 1 }}
         >
-          {title}
-        </Typography>
+          {title.title}
+        </Link>
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small">
-          Sign up
-        </Button>
+        {!localStorage.isAuthenticated && <div>
+          <Button variant="outlined" size="small" href="/signup">
+            Sign up
+          </Button>
+          <Button variant="outlined" size="small" href="/login">
+            Login
+          </Button>
+        </div>}
       </Toolbar>
       <Toolbar
         component="nav"
         variant="dense"
         sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
       >
-        {sections.map((section) => (
+        {sections.map((section) => ((section.admin && localStorage.isAuthenticated && localStorage.isAdmin) || !section.admin) && (
           <Link
             color="inherit"
             noWrap
@@ -62,7 +69,7 @@ Header.propTypes = {
       url: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.object.isRequired,
 };
 
 export default Header;

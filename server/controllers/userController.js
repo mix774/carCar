@@ -27,7 +27,7 @@ class UserController {
 			const hashPassword = await bcrypt.hash(password, 5)
 			const user = await User.create({ firstName, secondName, email, phoneNumber, password: hashPassword, role, favorites })
 			const token = generateJwt(user._id, user.email, user.role)
-			return res.json({ token })
+			return res.json({ token, role: user.role})
 		} catch (err) {
 			next(ApiError.internal(err.message))
 		}
@@ -45,7 +45,7 @@ class UserController {
 				return next(ApiError.badRequest("Невозможно войти в систему"))
 			}
 			const token = generateJwt(user._id, user.email, user.role)
-			return res.json({token})
+			return res.json({token, role: user.role})
 		} catch (err) {
 			next(ApiError.internal(err.message))
 		}

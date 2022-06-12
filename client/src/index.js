@@ -10,25 +10,34 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import PostsList from './components/PostsList';
 import Admin from './routes/admin';
+import Login from './routes/login';
+import SignUp from './routes/signUp';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const title = {
+  title: 'carCar', url: '/'
+}
 const sections = [
+  { title: 'Главная', url: '/' },
   { title: 'О компании', url: '#' },
   { title: 'Политика работы', url: '#' },
   { title: 'Контакты', url: '/contacts' },
-  {title: 'Админ-панель', url: '/admin'},
+  {title: 'Админ-панель', url: '/admin', admin: true}
 ];
 
 root.render(
   <BrowserRouter>
     <Container maxWidth="lg">
-    <Header title="carCar" sections={sections} />
+    <Header title={title} sections={sections} />
       <main>
         <Grid container spacing={0} sx={{ mt: 3 }}>
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="contacts" element={<Contacts />} />
             <Route path="admin" element={<Admin />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<SignUp />} />
           </Routes>
         </Grid>
       </main>
