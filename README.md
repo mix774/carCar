@@ -1,6 +1,9 @@
 Активные таски
 
-разобраться 
+Добавить кнопку в админе  "Добавить объявление" https://mui.com/material-ui/react-button/, 
+добавить таблицу https://mui.com/material-ui/react-table/
+
+
 
 посмотреть зачем нужен check
 

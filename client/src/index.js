@@ -9,12 +9,14 @@ import reportWebVitals from './reportWebVitals';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import PostsList from './components/PostsList';
+import Admin from './routes/admin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const sections = [
   { title: 'О компании', url: '#' },
   { title: 'Политика работы', url: '#' },
   { title: 'Контакты', url: '/contacts' },
+  {title: 'Админ-панель', url: '/admin'},
 ];
 
 root.render(
@@ -22,10 +24,11 @@ root.render(
     <Container maxWidth="lg">
     <Header title="carCar" sections={sections} />
       <main>
-        <Grid container spacing={5} sx={{ mt: 3 }}>
+        <Grid container spacing={0} sx={{ mt: 3 }}>
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="contacts" element={<Contacts />} />
+            <Route path="admin" element={<Admin />} />
           </Routes>
         </Grid>
       </main>

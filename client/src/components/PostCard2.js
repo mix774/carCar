@@ -35,7 +35,7 @@ function PostCard(props) {
 	return (
 	<Grid item xs={13} md={3}>
 	<CardActionArea component="a" href="#">
-	  <Card sx={{ height: 445}}>
+	  <Card sx={{ height: 300}}>
 		<Typography component="h3" variant="h5">
 			{`${post.model.name} ${post.type.name} ${post.year}`}
 		</Typography>
@@ -47,7 +47,7 @@ function PostCard(props) {
 		/>
 		<CardContent>
 			<Typography variant="body2" color="text.secondary">
-				{post.description}
+				
 			</Typography>
 		</CardContent>
 		<CardActions disableSpacing>
