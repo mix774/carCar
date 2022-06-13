@@ -32,11 +32,11 @@ function PostCard(props) {
 						</Typography>
 						{
 							post.images.length > 0 && <CardMedia
-							component="img"
-							height="194"
-							image={`http://localhost:3000/image/${post.images[0]}`} 
-							alt="Car image"
-						  />
+								component="img"
+								height="194"
+								image={`http://localhost:3000/image/${post.images[0]}`}
+								alt="Car image"
+							/>
 						}
 					</CardContent>
 				</Card>

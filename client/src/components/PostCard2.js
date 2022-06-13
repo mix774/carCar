@@ -28,38 +28,38 @@ function PostCard(props) {
 		transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
 		marginLeft: 'auto',
 		transition: theme.transitions.create('transform', {
-		  duration: theme.transitions.duration.shortest,
+			duration: theme.transitions.duration.shortest,
 		}),
 	}));
-	
+
 	return (
-	<Grid item xs={13} md={3}>
-	<CardActionArea component="a" href="#">
-	  <Card sx={{ height: 300}}>
-		<Typography component="h3" variant="h5">
-			{`${post.model.name} ${post.type.name} ${post.year}`}
-		</Typography>
-		<CardMedia
-		  component="img"
-		  height="194"
-		  image={`http://localhost:3000/image/${post.images[0]}`} 
-		  alt="Paella dish"
-		/>
-		<CardContent>
-			<Typography variant="body2" color="text.secondary">
-				
-			</Typography>
-		</CardContent>
-		<CardActions disableSpacing>
-		<IconButton aria-label="add to favorites">
-			<FavoriteIcon />
-		</IconButton>
-		</CardActions>
-		<Collapse timeout="auto" unmountOnExit>
-		</Collapse>
-	  </Card>
-	  </CardActionArea>
-	</Grid>
+		<Grid item xs={13} md={3}>
+			<CardActionArea component="a" href="#">
+				<Card sx={{ height: 300 }}>
+					<Typography component="h3" variant="h5">
+						{`${post.model.name} ${post.type.name} ${post.year}`}
+					</Typography>
+					<CardMedia
+						component="img"
+						height="194"
+						image={`http://localhost:3000/image/${post.images[0]}`}
+						alt="Paella dish"
+					/>
+					<CardContent>
+						<Typography variant="body2" color="text.secondary">
+
+						</Typography>
+					</CardContent>
+					<CardActions disableSpacing>
+						<IconButton aria-label="add to favorites">
+							<FavoriteIcon />
+						</IconButton>
+					</CardActions>
+					<Collapse timeout="auto" unmountOnExit>
+					</Collapse>
+				</Card>
+			</CardActionArea>
+		</Grid>
 	);
 }
 

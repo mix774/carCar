@@ -23,13 +23,13 @@ const sections = [
   { title: 'О компании', url: '#' },
   { title: 'Политика работы', url: '#' },
   { title: 'Контакты', url: '/contacts' },
-  {title: 'Админ-панель', url: '/admin', admin: true}
+  { title: 'Админ-панель', url: '/admin', admin: true }
 ];
 
 root.render(
   <BrowserRouter>
     <Container maxWidth="lg">
-    <Header title={title} sections={sections} />
+      <Header title={title} sections={sections} />
       <main>
         <Grid container spacing={0} sx={{ mt: 3 }}>
           <Routes>
