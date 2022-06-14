@@ -14,6 +14,7 @@ import SignUp from './routes/signUp';
 import About from './routes/about';
 import Footer from './Footer'
 import Post from './routes/post'
+import AddPost from './routes/addPost'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -42,6 +43,7 @@ root.render(
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="post/:id" element={<Post />} />
+            <Route path="addpost" element={<AddPost />} />
           </Routes>
         </Grid>
       </main>

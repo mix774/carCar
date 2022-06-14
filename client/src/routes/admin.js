@@ -3,6 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { getAllPosts } from '../services/PostService.js'
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
+import { useNavigate } from 'react-router-dom';
 
 
 function Admin() {
@@ -58,10 +59,12 @@ function Admin() {
 		}
 	}
 
+	const nav = useNavigate()
+
 	return (
 		<main style={{ width: '100%' }}>
 
-			<Button style={{ width: '100%', background: 'green', marginBottom: '25px' }} variant="contained" onClick={() => { }}>Добавить объявление</Button>
+			<Button style={{ width: '100%', background: 'green', marginBottom: '25px' }} variant="contained" onClick={() => {nav('/addpost')}}>Добавить объявление</Button>
 			<div style={{ height: 400, width: '100%' }}>
 				<DataGrid
 					rows={posts.map((post, index) =>

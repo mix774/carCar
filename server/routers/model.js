@@ -6,7 +6,7 @@ const checkRole = require('../middleware/CheckRoleMiddleware')
 //создать 
 router.post('/model', checkRole('ADMIN'), modelController.create)
 
-//отобразить все машины
+//получить все модели
 router.get('/models', modelController.getAll)
 
 //обновить

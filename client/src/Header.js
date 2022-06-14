@@ -58,7 +58,7 @@ function Header(props) {
       >
         {sections.map((section) => ((section.admin && localStorage.isAuthenticated && localStorage.isAdmin) || !section.admin) && (
           <Link
-            class={classes.links}
+            className={classes.links}
             textDecoration="none"
             color="inherit"
             noWrap

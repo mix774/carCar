@@ -6,7 +6,7 @@ const checkRole = require('../middleware/CheckRoleMiddleware')
 //создать 
 router.post('/brand', checkRole('ADMIN'), brandController.create)
 
-//отобразить все машины
+//получить все бренды
 router.get('/brands', brandController.getAll)
 
 //удалить по id
