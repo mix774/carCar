@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import PostsList from './components/PostsList';
+import Main from './Main'
 
 function App() {
   return (
-    <PostsList />
+    <Main />
   );
 }
 

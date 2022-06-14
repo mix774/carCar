@@ -15,6 +15,7 @@ import About from './routes/about';
 import Footer from './Footer'
 import Post from './routes/post'
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const title = {
   title: 'carCar', url: '/'

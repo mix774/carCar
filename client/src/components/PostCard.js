@@ -17,8 +17,8 @@ function PostCard(props) {
 	const { post } = props;
 
 	return (
-		<Grid item xs={13} md={3}>
-			<CardActionArea component="a" href="#">
+		<Grid item xs={13} md={3} >
+			<CardActionArea component="a" href={`/post/${post._id}`}>
 				<Card sx={{ height: 300 }}>
 					<Typography component="h3" variant="h5">
 						<Link
