@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { getAllPosts } from '../services/PostService.js'
 import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
 
 
 function Admin() {
@@ -27,10 +28,16 @@ function Admin() {
 			type: 'number',
 		},
 		{
-			field: 'mileage',
-			headerName: 'Mileage',
-			type: 'number',
+			field: 'createdAt',
+			headerName: 'Created',
+			type: 'dateTime',
+			width: 200,
 		},
+		{
+			field: 'active',
+			headerName: 'Status',
+			type: 'boolean',
+		}
 	];
 
 	const [posts, setPosts] = useState([])
@@ -42,18 +49,37 @@ function Admin() {
 		})
 	}, [])
 
+	function icon(post) {
+		if (post.active) {
+			console.log('cwedcs');
+				return <Chip label="primary" color="primary" />
+		} else {
+				return <Chip label="primary" color="primary" />
+		}
+	}
+
 	return (
 		<main style={{ width: '100%' }}>
 
 			<Button style={{ width: '100%', background: 'green', marginBottom: '25px' }} variant="contained" onClick={() => { }}>Добавить объявление</Button>
 			<div style={{ height: 400, width: '100%' }}>
 				<DataGrid
-					rows={posts.map((post, index) => ({ id: index, model: `${post.model.name}`, type: `${post.type.name}`, year: `${post.year}`, amountOfOwners: `${post.amountOfOwners}`, price: `${post.price}`, mileage: `${post.mileage}` }))}
+					rows={posts.map((post, index) =>
+					({
+						id: index,
+						model: `${post.model.name}`,
+						type: `${post.type.name}`,
+						year: `${post.year}`,
+						amountOfOwners: `${post.amountOfOwners}`,
+						price: `${post.price}`,
+						mileage: `${post.mileage}`,
+						createdAt: `${post.createdAt}`,
+						active: `${icon(post)}`
+					}))}
 					columns={columns}
 					pageSize={5}
 					rowsPerPageOptions={[5]}
 					checkboxSelection
-
 				/>
 			</div>
 		</main>

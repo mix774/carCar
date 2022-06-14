@@ -8,11 +8,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import PostsList from './components/PostsList';
 import Admin from './routes/admin';
 import Login from './routes/login';
 import SignUp from './routes/signUp';
-
+import About from './routes/about';
+import Footer from './Footer'
+import Post from './routes/post'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const title = {
@@ -20,7 +21,7 @@ const title = {
 }
 const sections = [
   { title: 'Главная', url: '/' },
-  { title: 'О компании', url: '#' },
+  { title: 'О компании', url: '/about' },
   { title: 'Политика работы', url: '#' },
   { title: 'Контакты', url: '/contacts' },
   { title: 'Админ-панель', url: '/admin', admin: true }
@@ -35,12 +36,15 @@ root.render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="contacts" element={<Contacts />} />
+            <Route path="about" element={<About />} />
             <Route path="admin" element={<Admin />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
+            <Route path="post/:id" element={<Post />} />
           </Routes>
         </Grid>
       </main>
+      <Footer/>
     </Container>
   </BrowserRouter>
 );

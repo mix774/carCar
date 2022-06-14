@@ -1,0 +1,20 @@
+.header {
+	margin-left: -100px;
+}
+
+.highToolbar {
+	margin-left: -150px;
+	margin-right: -150px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.companyName {
+	text-decoration: none;
+	padding-left: 650px;
+}
+
+.btnSignUp {
+	margin-right: 10px;
+	
+}
