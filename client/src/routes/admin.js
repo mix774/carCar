@@ -4,7 +4,7 @@ import { getAllPosts } from '../services/PostService.js'
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import { useNavigate } from 'react-router-dom';
-
+import classes from './css/Admin.module.css'
 
 function Admin() {
 	const columns = [
@@ -64,9 +64,10 @@ function Admin() {
 	return (
 		<main style={{ width: '100%' }}>
 
-			<Button style={{ width: '100%', background: 'green', marginBottom: '25px' }} variant="contained" onClick={() => {nav('/addpost')}}>Добавить объявление</Button>
+			<Button className={classes.addButton} style={{ width: '100%', background: 'green', marginBottom: '25px' }} variant="contained" onClick={() => {nav('/addpost')}}>Добавить объявление</Button>
 			<div style={{ height: 400, width: '100%' }}>
 				<DataGrid
+					className={classes.row}
 					rows={posts.map((post, index) =>
 					({
 						id: index,

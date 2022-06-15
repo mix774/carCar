@@ -59,7 +59,7 @@ PostCard.propTypes = {
 		_id: PropTypes.string.isRequired,
 		year: PropTypes.number.isRequired,
 		description: PropTypes.string.isRequired,
-		amounOfOwners: PropTypes.number.isRequired,
+		amountOfOwners: PropTypes.number.isRequired,
 		price: PropTypes.number.isRequired,
 		mileage: PropTypes.number.isRequired,
 	}).isRequired,

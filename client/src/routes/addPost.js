@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FileUploaded from '../components/FileUploader'
+import Container from '@mui/material/Container';
+import classes from './css/AddPost.module.css'
 
 export default function AddPost() {
 
@@ -109,74 +111,81 @@ export default function AddPost() {
 	}
 
 	return (
-		<main style={{ padding: "1rem 0" }}>
+		<Container sx={{width: "80%"}} className={classes.main}>
+			<main style={{ padding: "1rem 0" }}>
 
-			<form onSubmit={addPost}>
-				<Stack spacing={2}>
-					<InputLabel id="brandLabel">Бренд</InputLabel>
-					<Select
-						labelId="brandLabel"
-						id="brandId"
-						value={brand}
-						label="Брэнд"
-						onChange={onBrandChange}
-					>
-						{brands?.map(brand => {
-							return (
-								<MenuItem key={brand._id} value={brand._id}>
-									{brand.name}
-								</MenuItem>
-							);
-						})}
-					</Select>
-					<InputLabel id="modelLabel">Модель</InputLabel>
-					<Select
-						labelId="modelLabel"
-						id="modelId"
-						value={model}
-						label="Модель"
-						onChange={onModelChange}
-					>
-						{models?.map(model => {
-							return (
-								<MenuItem key={model._id} value={model._id}>
-									{model.name}
-								</MenuItem>
-							);
-						})}
-					</Select>
-					<InputLabel id="typeLabel">Тип кузова</InputLabel>
-					<Select
-						labelId="typeLabel"
-						id="typeId"
-						value={type}
-						label="Тип кузова"
-						onChange={onTypeChange}
-					>
-						{types?.map(type => {
-							return (
-								<MenuItem key={type._id} value={type._id}>
-									{type.name}
-								</MenuItem>
-							);
-						})}
-					</Select>
-					<TextField id="year" value={year} onChange={onYearChange} label="Год выпуска" variant="standard" required />
-					<TextField id="amountOfOwners" value={amountOfOwners} onChange={onAmountOfOwnersChange} label="Количество владельцев" variant="standard" required />
-					<TextField id="description" value={description} onChange={onDescriptionChange} label="Описание" variant="standard" required />
-					<TextField id="price" value={price} onChange={onPriceChange} label="Цена" variant="standard" required />
-					<TextField id="mileage" value={mileage} onChange={onMileageChange} label="Пробег" variant="standard" required />
-					<FileUploaded
-						onFileSelectSuccess={(file) => setImage(file)}
-						onFileSelectError={({ error }) => alert(error)}
-					/>
-					<Button
-						variant="outlined"
-						type="submit"
-						label="submit"
-					>Создать</Button>
-				</Stack>
-			</form>
-		</main >
+				<form onSubmit={addPost}>
+					<Stack spacing={2}>
+						<InputLabel id="brandLabel" className={classes.brandLabel}>Бренд</InputLabel>
+						<Select
+							className={classes.brand}
+							labelId="brandLabel"
+							id="brandId"
+							value={brand}
+							label="Брэнд"
+							onChange={onBrandChange}
+						>
+							{brands?.map(brand => {
+								return (
+									<MenuItem key={brand._id} value={brand._id}>
+										{brand.name}
+									</MenuItem>
+								);
+							})}
+						</Select>
+						<InputLabel id="modelLabel" className={classes.modelLabel}>Модель</InputLabel>
+						<Select
+							className={classes.model}
+							labelId="modelLabel"
+							id="modelId"
+							value={model}
+							label="Модель"
+							onChange={onModelChange}
+						>
+							{models?.map(model => {
+								return (
+									<MenuItem key={model._id} value={model._id}>
+										{model.name}
+									</MenuItem>
+								);
+							})}
+						</Select>
+						<InputLabel id="typeLabel" className={classes.typeLabel}>Тип кузова</InputLabel>
+						<Select
+							className={classes.type}
+							labelId="typeLabel"
+							id="typeId"
+							value={type}
+							label="Тип кузова"
+							onChange={onTypeChange}
+						>
+							{types?.map(type => {
+								return (
+									<MenuItem key={type._id} value={type._id}>
+										{type.name}
+									</MenuItem>
+								);
+							})}
+						</Select>
+						<TextField className={classes.year} id="year" value={year} onChange={onYearChange} label="Год выпуска" variant="standard" required />
+						<TextField className={classes.amountOfOwners} id="amountOfOwners" value={amountOfOwners} onChange={onAmountOfOwnersChange} label="Количество владельцев" variant="standard" required />
+						<TextField className={classes.description} id="description" value={description} onChange={onDescriptionChange} label="Описание" variant="standard" required />
+						<TextField className={classes.price} id="price" value={price} onChange={onPriceChange} label="Цена" variant="standard" required />
+						<TextField className={classes.mileage} id="mileage" value={mileage} onChange={onMileageChange} label="Пробег" variant="standard" required />
+						<FileUploaded
+							className={classes.image}
+							onFileSelectSuccess={(file) => setImage(file)}
+							onFileSelectError={({ error }) => alert(error)}
+						/>
+						<Button
+							className={classes.addButton}
+							variant="outlined"
+							type="submit"
+							label="submit"
+						>Создать</Button>
+					</Stack>
+				</form>
+			</main >
+		</Container>
 	);
 }

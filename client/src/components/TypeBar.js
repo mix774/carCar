@@ -8,7 +8,8 @@ import Card from '@mui/material/Card';
 import Collapse from '@mui/material/Collapse';
 import classes from './css/TypeBar.module.css'
 
-function TypeBar() {
+function TypeBar({handleTypeFilter}) {
+
 	const [types, setTypes] = useState([])
 
 	useEffect(() => {
@@ -24,7 +25,7 @@ function TypeBar() {
 				<Grid container justifyContent="space-between" alignItems="center">
 					{types.map((type, index) => (
 						<Grid key={index} item>
-							<CardActionArea component="a" >
+							<CardActionArea component="a" onClick={() => handleTypeFilter(type._id)}>
 								<Card className={classes.types}>
 									<CardContent>
 										<Typography component="p" fontSize="20px" className={classes.title}>

@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import PostCard from './PostCard'
-import { getAllPosts } from '../services/PostService.js'
 
 
-function PostsList() {
-	const [posts, setPosts] = useState([])
 
-	useEffect(() => {
-		getAllPosts().then(fetchedPosts => {
-			console.log(fetchedPosts)
-			setPosts(fetchedPosts)
-		})
-	}, [])
+function PostsList({ posts }) {
+
 	return (
 		<Grid container spacing={4}>
 			{posts.map((post) => (
