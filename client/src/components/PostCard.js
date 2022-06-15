@@ -23,13 +23,7 @@ function PostCard(props) {
 			<CardActionArea component="a" href={`/post/${post._id}`}>
 				<Card sx={{ height: 450 }} className={classes.main}>
 					<Typography component="h3" variant="h5" className={classes.header}>
-						<Link
-							className={classes.headerLink}
-							to={`/post/${post._id}`}
-						>
 							{`${post.model.name}  ${post.year}`}
-						</Link>
-
 					</Typography>
 					<CardMedia
 						style={{ objectFit: "contain" }}

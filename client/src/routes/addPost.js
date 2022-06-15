@@ -3,8 +3,12 @@ import { TextField, Button, Stack, Select, MenuItem, InputLabel } from '@mui/mat
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import FileUploaded from '../components/FileUploader'
 
 export default function AddPost() {
+
+	const [image, setImage] = useState('')
+
 
 	const [model, setModel] = useState('')
 	const [type, setType] = useState('')
@@ -56,6 +60,8 @@ export default function AddPost() {
 					if (res.status === 200) {
 						console.log(res.data);
 						setModels(res.data)
+						setModel('')
+						setType('')
 					} else {
 						console.log('Unable to fetch models')
 					}
@@ -73,12 +79,13 @@ export default function AddPost() {
 		axios.post("/post", params, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.token}`
-			}})
+			}
+		})
 			.then(res => {
 				console.log(res)
 				if (res.status === 201) {
 					console.log('Post is created')
-					navigate("/admin")
+					uploadImage(res.data._id)
 				} else {
 					console.log('Unable to create post')
 				}
@@ -88,8 +95,22 @@ export default function AddPost() {
 			});
 	}
 
+	const uploadImage = (postId) => {
+		const formData = new FormData();
+		formData.append("image", image);
+
+		axios
+			.post(`/post/${postId}/uploadImages`, formData, { headers: { 'Authorization': `Bearer ${localStorage.token}` } })
+			.then((res) => {
+				console.log("File Upload success");
+				navigate("/admin")
+			})
+			.catch((err) => alert("File Upload Error"));
+	}
+
 	return (
 		<main style={{ padding: "1rem 0" }}>
+
 			<form onSubmit={addPost}>
 				<Stack spacing={2}>
 					<InputLabel id="brandLabel">Бренд</InputLabel>
@@ -145,6 +166,10 @@ export default function AddPost() {
 					<TextField id="description" value={description} onChange={onDescriptionChange} label="Описание" variant="standard" required />
 					<TextField id="price" value={price} onChange={onPriceChange} label="Цена" variant="standard" required />
 					<TextField id="mileage" value={mileage} onChange={onMileageChange} label="Пробег" variant="standard" required />
+					<FileUploaded
+						onFileSelectSuccess={(file) => setImage(file)}
+						onFileSelectError={({ error }) => alert(error)}
+					/>
 					<Button
 						variant="outlined"
 						type="submit"
