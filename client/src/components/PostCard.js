@@ -11,39 +11,46 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
+import classes from './css/PostCard.module.css'
+import { Container } from '@mui/system';
 
 
 function PostCard(props) {
 	const { post } = props;
 
 	return (
-		<Grid item xs={13} md={3} >
+		<Grid item xs={13} md={6} >
 			<CardActionArea component="a" href={`/post/${post._id}`}>
-				<Card sx={{ height: 300 }}>
-					<Typography component="h3" variant="h5">
+				<Card sx={{ height: 450 }} className={classes.main}>
+					<Typography component="h3" variant="h5" className={classes.header}>
 						<Link
+							className={classes.headerLink}
 							to={`/post/${post._id}`}
 						>
-							{`${post.model.name} ${post.type.name} ${post.year}`}
+							{`${post.model.name}  ${post.year}`}
 						</Link>
 
 					</Typography>
 					<CardMedia
+						style={{ objectFit: "contain" }}
+						className={classes.image}
 						component="img"
-						height="194"
+						width="560"
+						height="320"
 						image={`http://localhost:3000/image/${post.images[0]}`}
-						alt="Paella dish"
-					/>
-					<CardContent>
-						<Typography variant="body2" color="text.secondary">
 
+					/>
+					<Container style={{display: "flex", justifyContent: "space-between"}}>
+						<CardActions disableSpacing style={{width: "60%"}}>
+							<IconButton aria-label="add to favorites">
+								<FavoriteIcon />
+							</IconButton>
+						</CardActions>
+						<Typography style={{fontSize: "20px", width: "60%", display: "flex", justifyContent: "right", alignItems: "center"}}>
+						Стоимость: {`${post.price}`} руб.
 						</Typography>
-					</CardContent>
-					<CardActions disableSpacing>
-						<IconButton aria-label="add to favorites">
-							<FavoriteIcon />
-						</IconButton>
-					</CardActions>
+					</Container>
+
 					<Collapse timeout="auto" unmountOnExit>
 					</Collapse>
 				</Card>

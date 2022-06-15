@@ -6,14 +6,15 @@ import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import classes from './css/FeaturedPost.module.css'
 
 function FeaturedPost(props) {
   const { post } = props;
 
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#">
-        <Card sx={{ display: 'flex' }}>
+      <CardActionArea component="a" href="#" >
+        <Card sx={{ display: 'flex' }} style={{height: "250px"}} className={classes.main}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
               {post.title}
@@ -22,7 +23,7 @@ function FeaturedPost(props) {
               {post.description}
             </Typography>
             <Typography variant="subtitle1" color="primary">
-              Continue reading...
+              Читать далее ...
             </Typography>
           </CardContent>
           <CardMedia

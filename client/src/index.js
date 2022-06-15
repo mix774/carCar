@@ -31,8 +31,8 @@ const sections = [
 
 root.render(
   <BrowserRouter>
+    <Header title={title} sections={sections} />
     <Container maxWidth="lg">
-      <Header title={title} sections={sections} />
       <main>
         <Grid container spacing={0} sx={{ mt: 3 }}>
           <Routes>
@@ -47,8 +47,8 @@ root.render(
           </Routes>
         </Grid>
       </main>
-      <Footer/>
     </Container>
+    <Footer />
   </BrowserRouter>
 );
 

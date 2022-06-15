@@ -1,10 +1,32 @@
-.types {
-	width: 10vw;
-	height: 15vh;
-	background-color: white;
+.typeBar {
+	margin-bottom: 50px;
+	font-size: 30px;
 }
 
+.types {
+	display: flex;
+	width: 150px;
+	height: 100px;
+	background-color: white;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 1.5s;
+}
+
+@keyframes show{
+	0%{
+	opacity:0;
+	}
+	100% {
+	opacity:1;
+	}
+	}
+
 .title {
-	background-color: aqua;
-	text-align: center;
+	text-transform: capitalize;	
+	font-size: 25px;
 }

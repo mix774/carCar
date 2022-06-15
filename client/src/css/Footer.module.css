@@ -1,0 +1,14 @@
+.footer {
+	flex: 0 0 auto;
+	box-sizing: border-box;
+	margin-top: 250px;
+	margin-bottom: 10px;
+}
+
+.contactInfo {
+}
+
+.society {
+	color: black;
+	margin-bottom: 15px;
+}

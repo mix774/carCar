@@ -6,68 +6,78 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import classes from './css/Footer.module.css'
-
+import PlaceIcon from '@mui/icons-material/Place';
+import CallIcon from '@mui/icons-material/Call';
 
 function Footer(props) {
 
 	return (
-		<Box component="footer" sx={{ bgcolor: 'background.paper', marginTop: '150px', marginBottom: "15px", paddingTop: "20em" }}>
-
+		<Box component="footer" className={classes.footer}>
 			<hr />
-
-			<Container maxWidth="lg" sx={{ display: "flex", justifyContent: "space-between", marginTop: "-15px" }}>
-
-				<Container maxWidth="lg">
+			<Container maxWidth="lg" sx={{ display: "flex", justifyContent: "space-between", marginTop: "15px" }}>
+				<Container maxWidth="lg" className={classes.contactInfo}>
 					<Typography
 						component="h3"
+						style={{ marginBottom: "5px" }}
 					>
 						Контактная информация
 					</Typography>
-					<Container maxWidth="lg" sx={{ display: "flex", justifyContent: "space-between" }}>
-						<Typography
+					<Container maxWidth="lg" sx={{ display: "flex", justifyContent: "space-between" }} style={{paddingLeft: "0px", paddingRight: "0px"}}>
+						<Container sx={{ display: "flex" }} style={{paddingLeft: "0"}}>
+							<Typography marginRight="20px">
+								<PlaceIcon />
+							</Typography>
+							<Typography
+								variant="subtitle1"
+								color="text.secondary"
+								component="span"
+								marginLeft="-20px"
+								width="75%"
+							>
+								Россия, Москва и Московская область, Москва, МКАД, 50-й километр, внешняя сторона, м. Озёрная, Говорово
+							</Typography>
+						</Container>
+						<Container sx={{ display: "flex" }} style={{paddingLeft: "0", paddingRight: "0"}}>
+							<Typography style={{marginLeft: "100px", marginRight: "5px"}}>
+								<CallIcon />
+							</Typography>
+							<Typography
 							variant="subtitle1"
 							color="text.secondary"
-							component="p"
-							marginLeft="-20px"
-							width="45%"
-						>
-							Россия, Москва и Московская область, Москва, МКАД, 50-й километр, внешняя сторона, м. Озёрная, Говорово
-						</Typography>
-						<Typography
-							variant="subtitle1"
-							color="text.secondary"
-							component="p"
-							marginRight="150px"
+							component="span"
+							width="65%"
 						>
 							+7 (917) 560 04 29<br />
 							+7 (980) 903 20 61
 
 						</Typography>
+						</Container>
+						
 					</Container>
 				</Container>
 
 				<Typography
 					variant="subtitle1"
 					color="text.secondary"
-					component="p"
+					component="span"
 					width="20%"
 
 				>
 					<Typography
-						component="p"
-						style={{ color: 'black', marginBottom: '15px' }}>
+
+						style={{ color: 'black', marginBottom: '5px' }}>
 						Соц. сети
 					</Typography>
 					<Typography style={{ marginTop: "" }}>
 						<Typography
-							component="div"
-							style={{ display: "flex" }}>
+							component="span"
+							style={{ display: "flex", marginBottom: "5px" }}>
 							<FacebookIcon /> Facebook
 						</Typography>
 
 						<Typography
-							component="div"
-							style={{ display: "flex" }}>
+							component="span"
+							style={{ display: "flex", marginBottom: "5px" }}>
 							<InstagramIcon /> Instagram
 						</Typography>
 

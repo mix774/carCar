@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import Collapse from '@mui/material/Collapse';
 import classes from './css/TypeBar.module.css'
 
@@ -20,19 +19,15 @@ function TypeBar() {
 	}, [])
 
 	return (
-		<Grid sx={{ flexGrow: 1 }} container spacing={5} style={{marginBottom: "15px"}}>
+		<Grid sx={{ flexGrow: 1 }} container spacing={5} className={classes.typeBar}>
 			<Grid item xs={12}>
-				<Grid container justifyContent="space-between">
+				<Grid container justifyContent="space-between" alignItems="center">
 					{types.map((type, index) => (
 						<Grid key={index} item>
 							<CardActionArea component="a" >
-								<Card  className={classes.types}>
-									<CardMedia
-										component="img"
-										
-									/>
+								<Card className={classes.types}>
 									<CardContent>
-										<Typography variant="body2" color="text.secondary" component="p" className={classes.title}>
+										<Typography component="p" fontSize="20px" className={classes.title}>
 											{type.name}
 										</Typography>
 									</CardContent>

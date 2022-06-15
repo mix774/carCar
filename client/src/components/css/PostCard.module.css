@@ -1,0 +1,45 @@
+.main {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 2s;
+}
+
+@keyframes show{
+	0%{
+	opacity:0;
+	}
+	100% {
+	opacity:1;
+	}
+	}
+
+.header {
+	text-align: left;
+	padding: 10px 0 25px 25px; 
+}
+
+.headerLink { 
+	text-decoration: none;
+	color: black;
+}
+
+.cardInner {
+	display: flex; 
+	justify-content: space-between;
+	/* background-color: red; */
+}
+
+.description {
+	width: 60%; 
+	/* background-color: aqua; */
+	padding: 25px 0 0 15px;
+	font-size: 18px; 
+}
+
+.image {
+	padding: 0;
+	margin: 0;
+	/* background-color: blue; */
+} 

@@ -1,13 +1,12 @@
 .header {
-	margin-left: -100px;
+	position: sticky;
+	width: 100%;
 }
 
 .highToolbar {
-	margin-left: -150px;
-	margin-right: -150px;
 	display: flex;
 	justify-content: space-between;
-	background-color: #d7d7d7;
+	background-color: #d7d7d7 ;
 }
 
 .logo {
@@ -34,10 +33,11 @@
 	justify-content: space-between;
 	overflow: auto;
 	height: 25px;
+	margin-left: 120px;
+	margin-right: 120px;
 }
 
-.links {
-	border-radius: 10px;
+.sectionText {
 	font-size: 18px;
 	text-decoration: none;
 	color: inherit;
