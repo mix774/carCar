@@ -16,6 +16,15 @@ class PostController {
 		}
 	}
 
+	async getAllActive(req, res, next) {
+		try {
+			const posts = await Post.find({active: true}).populate('model').populate('type').populate({path: 'model' , populate: {path: 'brand'}})
+			return res.json(posts)
+		} catch (err) {
+			next(ApiError.internal(err.message))
+		}
+	}
+
 	async getAll(req, res, next) {
 		try {
 			const posts = await Post.find().populate('model').populate('type')

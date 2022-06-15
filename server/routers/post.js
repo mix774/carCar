@@ -7,7 +7,9 @@ const checkRole = require('../middleware/CheckRoleMiddleware')
 router.post('/post', checkRole('ADMIN'), postController.create)
 
 //отобразить все объявления
-router.get('/posts', postController.getAll)
+router.get('/allposts', checkRole('ADMIN'), postController.getAll)
+
+router.get('/posts', postController.getAllActive)
 
 //найти определенное объявление по id
 router.get('/posts/:id', postController.getById)

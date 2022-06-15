@@ -1,10 +1,9 @@
+import { Container } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import PostsList from './components/PostsList';
 import TypeBar from './components/TypeBar';
 import classes from './css/Main.module.css'
-import { getAllPosts } from './services/PostService.js'
-
-
+import { getAllActivePosts } from './services/PostService.js'
 
 
 function Main() {
@@ -13,9 +12,9 @@ function Main() {
 	const [typeFilter, setTypeFilter] = useState('')
 
 	useEffect(() => {
-		getAllPosts().then(fetchedPosts => {
-			console.log(`All posts ${fetchedPosts.length}`)
-			setPosts(fetchedPosts)
+		getAllActivePosts().then(res => {
+			console.log(res.data)
+			setPosts(res.data)
 		})
 	}, [])
 
@@ -28,13 +27,13 @@ function Main() {
 	const filteredPosts = typeFilter ? posts.filter(p => p.type._id === typeFilter) : posts;
 
 	return (
-		<main>
+		<Container fixed >
 			<div className={classes.startPage}>
 				<p>Выберите машину своей мечты</p>
 			</div>
 			<TypeBar handleTypeFilter={handleTypeFilter} />
 			<PostsList posts={filteredPosts} />
-		</main>
+		</Container>
 	)
 }
 

@@ -18,20 +18,12 @@ import AddPost from './routes/addPost'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const title = {
-  title: 'carCar', url: '/'
-}
-const sections = [
-  { title: 'Главная', url: '/' },
-  { title: 'О компании', url: '/about' },
-  { title: 'Политика работы', url: '#' },
-  { title: 'Контакты', url: '/contacts' },
-  { title: 'Админ-панель', url: '/admin', admin: true }
-];
+
+
 
 root.render(
   <BrowserRouter>
-    <Header title={title} sections={sections} />
+    <Header/>
     <Container maxWidth="lg">
       <main>
         <Grid container spacing={0} sx={{ mt: 3 }}>

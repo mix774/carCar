@@ -116,7 +116,7 @@ export default function AddPost() {
 
 				<form onSubmit={addPost}>
 					<Stack spacing={2}>
-						<InputLabel id="brandLabel" className={classes.brandLabel}>Бренд</InputLabel>
+						<InputLabel id="brandLabel" style={{color: "black"}} className={classes.brandLabel}>Бренд</InputLabel>
 						<Select
 							className={classes.brand}
 							labelId="brandLabel"
@@ -133,7 +133,7 @@ export default function AddPost() {
 								);
 							})}
 						</Select>
-						<InputLabel id="modelLabel" className={classes.modelLabel}>Модель</InputLabel>
+						<InputLabel id="modelLabel" style={{color: "black"}} className={classes.modelLabel}>Модель</InputLabel>
 						<Select
 							className={classes.model}
 							labelId="modelLabel"
@@ -150,14 +150,16 @@ export default function AddPost() {
 								);
 							})}
 						</Select>
-						<InputLabel id="typeLabel" className={classes.typeLabel}>Тип кузова</InputLabel>
+						<InputLabel id="typeLabel" style={{color: "black"}} className={classes.typeLabel}>Тип кузова</InputLabel>
 						<Select
+							
 							className={classes.type}
 							labelId="typeLabel"
 							id="typeId"
 							value={type}
 							label="Тип кузова"
 							onChange={onTypeChange}
+							
 						>
 							{types?.map(type => {
 								return (
@@ -167,11 +169,11 @@ export default function AddPost() {
 								);
 							})}
 						</Select>
-						<TextField className={classes.year} id="year" value={year} onChange={onYearChange} label="Год выпуска" variant="standard" required />
-						<TextField className={classes.amountOfOwners} id="amountOfOwners" value={amountOfOwners} onChange={onAmountOfOwnersChange} label="Количество владельцев" variant="standard" required />
-						<TextField className={classes.description} id="description" value={description} onChange={onDescriptionChange} label="Описание" variant="standard" required />
-						<TextField className={classes.price} id="price" value={price} onChange={onPriceChange} label="Цена" variant="standard" required />
-						<TextField className={classes.mileage} id="mileage" value={mileage} onChange={onMileageChange} label="Пробег" variant="standard" required />
+						<TextField className={classes.year} id="year" value={year} onChange={onYearChange} label="Год выпуска" variant="outlined" required style={{marginTop: "30px", color: "black"}}/>
+						<TextField className={classes.amountOfOwners} id="amountOfOwners" value={amountOfOwners} onChange={onAmountOfOwnersChange} label="Количество владельцев" variant="outlined" required style={{marginTop: "30px", color: "black"}}/>
+						<TextField className={classes.description} id="description" value={description} onChange={onDescriptionChange} label="Описание" variant="outlined" required style={{marginTop: "30px", color: "black"}}/>
+						<TextField className={classes.price} id="price" value={price} onChange={onPriceChange} label="Цена" variant="outlined" required style={{marginTop: "30px", color: "black"}}/>
+						<TextField className={classes.mileage} id="mileage" value={mileage} onChange={onMileageChange} label="Пробег" variant="outlined" required style={{marginTop: "30px", color: "black"}}/>
 						<FileUploaded
 							className={classes.image}
 							onFileSelectSuccess={(file) => setImage(file)}

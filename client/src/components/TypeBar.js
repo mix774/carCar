@@ -26,7 +26,7 @@ function TypeBar({handleTypeFilter}) {
 					{types.map((type, index) => (
 						<Grid key={index} item>
 							<CardActionArea component="a" onClick={() => handleTypeFilter(type._id)}>
-								<Card className={classes.types}>
+								<Card className={classes.types} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
 									<CardContent>
 										<Typography component="p" fontSize="20px" className={classes.title}>
 											{type.name}

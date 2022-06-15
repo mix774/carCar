@@ -23,7 +23,7 @@ function PostCard(props) {
 			<CardActionArea component="a" href={`/post/${post._id}`}>
 				<Card sx={{ height: 450 }} className={classes.main}>
 					<Typography component="h3" variant="h5" className={classes.header}>
-							{`${post.model.name}  ${post.year}`}
+							{`${post.model.brand.name} ${post.model.name} ${post.year}`}
 					</Typography>
 					<CardMedia
 						style={{ objectFit: "contain" }}
@@ -40,7 +40,7 @@ function PostCard(props) {
 								<FavoriteIcon />
 							</IconButton>
 						</CardActions>
-						<Typography style={{fontSize: "20px", width: "60%", display: "flex", justifyContent: "right", alignItems: "center"}}>
+						<Typography style={{fontSize: "20px", width: "70%", display: "flex", justifyContent: "right", alignItems: "center"}}>
 						Стоимость: {`${post.price}`} руб.
 						</Typography>
 					</Container>
