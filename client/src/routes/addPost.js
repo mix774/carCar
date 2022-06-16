@@ -152,14 +152,12 @@ export default function AddPost() {
 						</Select>
 						<InputLabel id="typeLabel" style={{color: "black"}} className={classes.typeLabel}>Тип кузова</InputLabel>
 						<Select
-							
 							className={classes.type}
 							labelId="typeLabel"
 							id="typeId"
 							value={type}
 							label="Тип кузова"
 							onChange={onTypeChange}
-							
 						>
 							{types?.map(type => {
 								return (
@@ -174,7 +172,8 @@ export default function AddPost() {
 						<TextField className={classes.description} id="description" value={description} onChange={onDescriptionChange} label="Описание" variant="outlined" required style={{marginTop: "30px", color: "black"}}/>
 						<TextField className={classes.price} id="price" value={price} onChange={onPriceChange} label="Цена" variant="outlined" required style={{marginTop: "30px", color: "black"}}/>
 						<TextField className={classes.mileage} id="mileage" value={mileage} onChange={onMileageChange} label="Пробег" variant="outlined" required style={{marginTop: "30px", color: "black"}}/>
-						<FileUploaded
+						<FileUploaded 
+							style={{width: "100%"}}
 							className={classes.image}
 							onFileSelectSuccess={(file) => setImage(file)}
 							onFileSelectError={({ error }) => alert(error)}

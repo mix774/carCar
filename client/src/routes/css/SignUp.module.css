@@ -1,0 +1,68 @@
+.main {
+	width: 50%;
+	background-color: #d7d7d7;
+	border: 1px solid black;
+	color: black;
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.1s;
+}
+
+.firstName {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.3s;
+}
+
+.secondName {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.5s;
+}
+
+.phoneNumber {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.7s;
+}
+
+.email {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.9s;
+}
+
+.password {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 1.2s;
+}
+
+.signUp {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 1.4s;
+}
+
+@keyframes show{
+	0%{
+	opacity:0;
+	}
+	100% {
+	opacity:1;
+	}
+	}

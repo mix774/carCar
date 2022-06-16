@@ -4,12 +4,16 @@ import PostCard from './PostCard'
 
 
 
-function PostsList({ posts }) {
-
+function PostsList({ posts, favorites, reloadFavorites}) {
+	const isFavorite = (postId) => {
+		const res = favorites.includes(postId)
+		return res
+	}
+	
 	return (
 		<Grid container spacing={4}>
 			{posts.map((post) => (
-				<PostCard post={post} key={post._id} />
+				<PostCard reloadFavorites={reloadFavorites} post={post} key={post._id} isFavorite={isFavorite(post._id)}/>
 			))}
 		</Grid>
 	);

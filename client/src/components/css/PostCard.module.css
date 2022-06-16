@@ -1,4 +1,5 @@
 .main {
+	
 	opacity: 0;
 	transition: 1s;
 	animation: show 3s 1;

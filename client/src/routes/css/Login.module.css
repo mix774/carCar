@@ -1,0 +1,43 @@
+.main {
+	background-color: #d7d7d7;
+	border: 1px solid black;
+	color: black;
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.1s;
+}
+
+.email {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.3s;
+}
+
+.password {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.5s;
+}
+
+.login {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.7s;
+}
+
+@keyframes show{
+	0%{
+	opacity:0;
+	}
+	100% {
+	opacity:1;
+	}
+	}

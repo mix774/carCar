@@ -2,6 +2,7 @@ const Router = require('express')
 const router = new Router()
 const userController = require('../controllers/userController')
 const AuthMiddleware = require('../middleware/AuthMiddleware')
+const checkRole = require('../middleware/CheckRoleMiddleware')
 // TODO: 
 
 //регистрация пользователя
@@ -23,6 +24,12 @@ router.put('/users', userController.update)
 router.delete('/users/:id', userController.delete)
 
 //получение всех избранных
-router.get('/user/favorites/:id', userController.getAllFavorites)
+router.get('/user/favorites', checkRole('USER'), userController.getAllFavorites)
+
+router.get('/user/favoritesIds', checkRole('USER'), userController.getAllFavoritesIds)
+
+router.put('/user/addFav/:postId', checkRole('USER'), userController.addFavorites)
+
+router.delete('/user/removeFav/:postId', checkRole('USER'), userController.removeFavorites)
 
 module.exports = router

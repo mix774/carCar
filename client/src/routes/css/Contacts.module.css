@@ -1,0 +1,38 @@
+.footer {
+	flex: 0 0 auto;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+}
+
+.title {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.2s;
+}
+
+.place {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.5s;
+}
+
+.mobile {
+	opacity: 0;
+	transition: 1s;
+	animation: show 3s 1;
+	animation-fill-mode: forwards;
+	animation-delay: 0.8s;
+}
+
+@keyframes show{
+	0%{
+	opacity:0;
+	}
+	100% {
+	opacity:1;
+	}
+	}

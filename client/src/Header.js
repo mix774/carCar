@@ -1,23 +1,21 @@
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
-import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import classes from './css/Header.module.css'
 import CarCrashIcon from '@mui/icons-material/CarCrash';
-import { Container } from '@mui/system';
-import { isAdmin } from './utils'
+import { isAdmin, isUser} from './utils'
 
 function Header() {
 
   const title = { title: 'carCar', url: '/' }
   const sections = [
-    { title: 'Главная', url: '/', admin: false },
-    { title: 'О компании', url: '/about', admin: false },
-    { title: 'Политика работы', url: '#', admin: false },
-    { title: 'Контакты', url: '/contacts', admin: false },
-    { title: 'Админ-панель', url: '/admin', admin: true }
+    { title: 'Главная', url: '/', admin: false, user: false},
+    { title: 'О компании', url: '/about', admin: false, user: false},
+    { title: 'Контакты', url: '/contacts', admin: false, user: false},
+    { title: 'Админ-панель', url: '/admin', admin: true, user: false},
+    { title: 'Избранные', url: '/favorites', admin: false, user: true}
   ];
 
   const nav = useNavigate()
@@ -27,9 +25,19 @@ function Header() {
     nav('/')
   }
 
-  sections.map(section => {
-    console.log(`${section.title} ${(section.admin && isAdmin()) || !section.admin}`);
-  })
+  const shouldDisplay = (adminSection, userSection) => {
+    if (adminSection) {
+      if (!isAdmin()) {
+        return false
+      }
+    }
+    if(userSection) {
+      if (!isUser()) {
+        return false
+      }
+    }
+    return true
+  }
 
   return (
     <React.Fragment >
@@ -69,7 +77,7 @@ function Header() {
         component="nav"
         variant="dense"
       >
-        {sections.map((section) => ((section.admin && isAdmin()) || !section.admin) && (
+        {sections.map((section) => (shouldDisplay(section.admin, section.user) &&
           <Link
             style={{ textDecoration: 'none', fontSize: '18px', color: 'inherit', padding: '5px' }}
             className={classes.sectionText}
